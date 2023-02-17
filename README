@@ -22,6 +22,7 @@ visualization (nirs_plot.m).
 Input:
 - *.snirf files (bids_raw: nirs)
 - *events.tsv files (bids_raw: nirs)
+- TIMING.mat (this folder)
 Output:
 - gamma.mat: output of the GLM analysis with gamma function for each participant (for statistics)
 - gaussian.mat: output of the GLM analysis with gaussians for each participant (for visualization)
@@ -48,6 +49,11 @@ Input:
 Dependencies:
 - Fieldtrip toolbox
 - (Homer3 toolbox)
+
+TIMING
+Mat-file containing duration of the trials and the relative onset of the finger
+presses and foot lifting (relative to the appearance of the red cross). This
+information was extracted from the behavioral data.
 
 CUSTOM_HOMERFCT
 Folder containing customized Homer3 functions. See description of functions for
