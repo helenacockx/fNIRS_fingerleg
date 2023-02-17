@@ -1,0 +1,54 @@
+This repository contains example MATLAB code to analyze the dataset 'Automatic
+and non-automatic finger and leg movements measured with functional near-infrared
+spectroscopy (fNIRS)' (https://doi.org/10.34973/vesb-mh30).
+It follows the analysis as provided in the paper 'fNIRS is sensitive to leg
+activity in the primary motor cortex after systemic artifact correction'
+(NeuroImage, 2023) (https://doi.org/10.1016/j.neuroimage.2023.119880).
+It requires installation of the Homer3 toolbox (https://openfnirs.org/software/homer/homer3/)
+and the FieldTrip toolbox (https://www.fieldtriptoolbox.org/).
+
+DISCLAIMER: the original nirs analysis from the NeuroImage paper was performed
+with the GUI from Homer3 and started from the original .oxy4-files. The scripts
+provided here start from the bids_raw data and are analyzed with a script based
+on Homer functions. Therefore, the exact values of the results might deviate a
+little from the original paper.
+
+CONTENT:
+========
+NIRS_ANALYSIS
+Loads the nirs data, preprocesses the data and performs a GLM analysis.
+The data is saved for later statistical analysis (nirs_statistics.m) or
+visualization (nirs_plot.m).
+Input:
+- *.snirf files (bids_raw: nirs)
+- *events.tsv files (bids_raw: nirs)
+Output:
+- gamma.mat: output of the GLM analysis with gamma function for each participant (for statistics)
+- gaussian.mat: output of the GLM analysis with gaussians for each participant (for visualization)
+Dependencies:
+- Homer3 toolbox
+- custom_Homerfunct: see separate folder
+
+NIRS_STATISTICS
+performs the t-test statistics based on the GLM output with gamma
+functions.
+Input:
+- gamma.mat (created by nirs_analysis.m)
+Output:
+- stat_*.tsv: output table with the statistics for each condition and each chromophore
+- N_by_channel.mat: overview of the number of participants for each channel
+
+NIRS_PLOT
+Plots the outcome of the GLM analysis with gaussians. Plots each channel
+separately with HbO in red and HbR in blue and a shaded area containing
+the 95% confidence intervals.
+Input:
+- gaussian.mat (created by nirs_analysis.m)
+- N_by_channel.mat  (created by nirs_statistics.m)
+Dependencies:
+- Fieldtrip toolbox
+- (Homer3 toolbox)
+
+CUSTOM_HOMERFCT
+Folder containing customized Homer3 functions. See description of functions for
+more explanation.
